@@ -1,28 +1,28 @@
 public class MyLinkedList<E>{
   private int length;
-  private Node start,end;
+  private Node<E> start,end;
 
-  //@SuppressWarnings("unchecked")
+  @SuppressWarnings("unchecked")
   public MyLinkedList(){
     start = null;
     end = null;
     length = 0;
   }
-
+  @SuppressWarnings("unchecked")
   public void clear(){
     start = null;
     end = null;
     length = 0;
   }
-
-  public boolean add(E element){
+  @SuppressWarnings("unchecked")
+  public boolean add(E value){
     if (length == 0){
-      Node n = new Node(value, null, null);
+      Node<E> n = new Node(value, null, null);
       start = n;
       end = n;
     }
     else{
-      Node n = new Node(value, end, null);
+      Node<E> n = new Node(value, end, null);
       end = n;
       n.prev().setNext(n);
     }
@@ -31,10 +31,10 @@ public class MyLinkedList<E>{
   }
 
   public int size(){return length;}
-
-  public Integer get(int index){
+  @SuppressWarnings("unchecked")
+  public E get(int index){
     int idx = 0;
-    Node current = start;
+    Node<E> current = start;
     while (idx != index){
       current = current.next();
       idx ++;
@@ -42,9 +42,10 @@ public class MyLinkedList<E>{
     return current.getData();
   }
 
-  public Integer set(int index, Integer value){
+  @SuppressWarnings("unchecked")
+  public E set(int index, E value){
     int idx = 0;
-    Node current = start;
+    Node<E> current = start;
     while (idx != index){
       current = current.next();
       idx ++;
@@ -52,6 +53,7 @@ public class MyLinkedList<E>{
     return current.setData(value);
   }
 
+  @SuppressWarnings("unchecked")
   public String toString(){
     if (length == 0) return "[]";
     String output = "[";

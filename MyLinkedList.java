@@ -32,6 +32,7 @@ public class MyLinkedList<E>{
 
   public int size(){return length;}
   @SuppressWarnings("unchecked")
+
   public E get(int index){
     int idx = 0;
     Node<E> current = start;
@@ -54,10 +55,24 @@ public class MyLinkedList<E>{
   }
 
   @SuppressWarnings("unchecked")
+  public void extend(MyLinkedList other){
+    Node<E> temp = other.start;
+    Node<E> temp2 = other.end;
+    end.setNext(temp);
+    temp.setPrev(end);
+    end = temp2;
+    length += other.size();
+    MyLinkedList<E> javaBroken = new MyLinkedList();
+    other.start = javaBroken.start;
+    other.end = javaBroken.end;
+    other.length = javaBroken.length;
+  }
+
+  @SuppressWarnings("unchecked")
   public String toString(){
     if (length == 0) return "[]";
     String output = "[";
-    Node current = start;
+    Node<E> current = start;
     while (current != null){
       output += current.getData() + ", ";
       current = current.next();

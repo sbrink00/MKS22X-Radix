@@ -15,7 +15,7 @@ public class MyLinkedList<E>{
     length = 0;
   }
   @SuppressWarnings("unchecked")
-  public boolean add(E value){
+  public boolean addLast(E value){
     if (length == 0){
       Node<E> n = new Node(value, null, null);
       start = n;
@@ -25,6 +25,21 @@ public class MyLinkedList<E>{
       Node<E> n = new Node(value, end, null);
       end = n;
       n.prev().setNext(n);
+    }
+    length ++;
+    return true;
+  }
+
+  public boolean addFirst(E value){
+    if (length == 0){
+      Node<E> n = new Node(value, null, null);
+      start = n;
+      end = n;
+    }
+    else{
+      Node<E> n = new Node(value, null, start);
+      start = n;
+      n.next().setPrev(n);
     }
     length ++;
     return true;
@@ -55,7 +70,7 @@ public class MyLinkedList<E>{
   }
 
   @SuppressWarnings("unchecked")
-  public void extend(MyLinkedList other){
+  public void extend(MyLinkedList<E> other){
     Node<E> temp = other.start;
     Node<E> temp2 = other.end;
     end.setNext(temp);
@@ -66,6 +81,19 @@ public class MyLinkedList<E>{
     other.start = javaBroken.start;
     other.end = javaBroken.end;
     other.length = javaBroken.length;
+  }
+
+  @SuppressWarnings("unchecked")
+  public E[] toArray(){
+    E[] output = (E[])new Object[length];
+    Node current = start;
+    int idx = 0;
+    while (current != null){
+      output[idx] = (E)current.getData();
+      current = current.next();
+      idx ++;
+    }
+    return output;
   }
 
   @SuppressWarnings("unchecked")

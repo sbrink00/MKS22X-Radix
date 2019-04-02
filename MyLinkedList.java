@@ -83,12 +83,13 @@ public class MyLinkedList<E>{
     other.length = javaBroken.length;
   }
 
+  @SuppressWarnings("unchecked")
   public E[] toArray(){
-    E[] output = new E[length];
+    E[] output = (E[])new Object[length];
     Node current = start;
     int idx = 0;
     while (current != null){
-      output[idx] = current.getData();
+      output[idx] = (E)current.getData();
       current = current.next();
       idx ++;
     }

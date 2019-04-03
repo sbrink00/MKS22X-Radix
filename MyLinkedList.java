@@ -30,6 +30,19 @@ public class MyLinkedList<E>{
     return true;
   }
 
+  @SuppressWarnings("unchecked")
+  public E removeFirst(){
+    E output = (E)start.getData();
+    if (length == 1) clear();
+    else {
+      start = start.next();
+      start.setPrev(null);
+      length --;
+    }
+    return output;
+  }
+
+  @SuppressWarnings("unchecked")
   public boolean addFirst(E value){
     if (length == 0){
       Node<E> n = new Node(value, null, null);
@@ -46,8 +59,8 @@ public class MyLinkedList<E>{
   }
 
   public int size(){return length;}
-  @SuppressWarnings("unchecked")
 
+  @SuppressWarnings("unchecked")
   public E get(int index){
     int idx = 0;
     Node<E> current = start;
@@ -71,16 +84,20 @@ public class MyLinkedList<E>{
 
   @SuppressWarnings("unchecked")
   public void extend(MyLinkedList<E> other){
+    if (other.length == 0) return;
+    if (this.length == 0) {
+      this.start = other.start;
+      this.end = other.end;
+      other.clear();
+      return;
+    }
     Node<E> temp = other.start;
     Node<E> temp2 = other.end;
     end.setNext(temp);
     temp.setPrev(end);
     end = temp2;
     length += other.size();
-    MyLinkedList<E> javaBroken = new MyLinkedList();
-    other.start = javaBroken.start;
-    other.end = javaBroken.end;
-    other.length = javaBroken.length;
+    other.clear();
   }
 
   @SuppressWarnings("unchecked")

@@ -85,19 +85,20 @@ public class MyLinkedList<E>{
   @SuppressWarnings("unchecked")
   public void extend(MyLinkedList<E> other){
     if (other.length == 0) return;
-    if (this.length == 0) {
+    else if (this.length == 0) {
       this.start = other.start;
       this.end = other.end;
       other.clear();
       return;
     }
-    Node<E> temp = other.start;
-    Node<E> temp2 = other.end;
-    end.setNext(temp);
-    temp.setPrev(end);
-    end = temp2;
-    length += other.size();
-    other.clear();
+    else{
+      int s = other.size();
+      end.setNext(other.start);
+      other.start.setPrev(end);
+      end = other.end;
+      length += s;
+      other.clear();
+    }
   }
 
   @SuppressWarnings("unchecked")

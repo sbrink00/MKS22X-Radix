@@ -2,7 +2,7 @@ import java.util.Arrays;
 public class Radix{
 
   public static void main(String[]args){
-    int[] ary = {2, 3, 5, 43241, 45, 1, 5, 4, 3, 21};
+    int[] ary = {2, 3, 5, 43241, 45, 1, -234, 5, 4, 3, 21};
     radixsort(ary);
     System.out.println(Arrays.toString(ary));
   }
